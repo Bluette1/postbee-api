@@ -5,6 +5,8 @@ require 'httparty'
 class Scraper
   def initialize(urls)
     @urls = urls
+    @logger = Logger.new(STDOUT) # Or use a file: Logger.new('log/scraper.log')
+    @logger.level = Logger::DEBUG
   end
 
   def scrape
@@ -58,17 +60,16 @@ class Scraper
               logo: job[:logo]
             )
             if job_post.save
-
-              puts "Saving #{job_post}"
+              @logger.info "Saved #{job_post}"
             else
-              p "Failed to save #{job_post.errors.full_messages}"
+              @logger.error "Failed to save #{job_post.errors.full_messages}"
             end
           else
-            p "One or more required fields are missing or empty #{job}"
+            @logger.warn "One or more required fields are missing or empty #{job}"
           end
         end
       else
-        puts("Failed to fetch #{url}")
+        @logger.debug "Failed to fetch #{url}"
       end
     end
   end
