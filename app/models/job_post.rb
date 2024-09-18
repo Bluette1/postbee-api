@@ -12,7 +12,8 @@ class JobPost
   field :featured, type: String
   field :link, type: String
   field :logo, type: String
-  field :badge, type: Array
+  field :badges, type: Array
+  field :tags, type: Array
 
   validates :title, :company_title, :link, presence: true
 end

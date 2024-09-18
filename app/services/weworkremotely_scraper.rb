@@ -10,8 +10,11 @@ class WeworkremotelyScraper < BaseScraper
       company_title = li.css('span:first-child.company').text
       job[:company_title] = company_title if company_title != ''
       job[:title] = li.css('span.title').text
-      job[:time] = li.css('span:not(:first-child).company').text
+      time = li.css('span:not(:first-child).company')
+      time = time.map { |time_node| time_node.text.strip }
+      job[:time] = time[0]
 
+      job[:location] = li.css('span.region.company').text
       job[:date] = li.css('span.date time').text
       job[:featured] = li.css('span.featured').text
 

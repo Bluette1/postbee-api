@@ -3,8 +3,15 @@ class JobScraperJob
 
   def perform(*_args)
     # Define URLs for each scraper
-    weworkremotely_urls = ['https://weworkremotely.com/categories/remote-full-stack-programming-jobs#job-listings']
-    remote_co_urls = ['https://remote.co/remote-jobs/developer/']
+    weworkremotely_urls = [
+      'https://weworkremotely.com/categories/remote-full-stack-programming-jobs#job-listings',
+      'https://weworkremotely.com/categories/remote-front-end-programming-jobs#job-listings',
+      'https://weworkremotely.com/categories/remote-back-end-programming-jobs#job-listings'
+    ]
+    remote_co_urls = [
+      'https://remote.co/remote-jobs/developer/',
+      'https://remote.co/remote-jobs/developer/page/2/'
+    ]
     remote_ok_urls = ['https://remoteok.com/remote-dev-jobs']
 
     # Create and run scrapers
