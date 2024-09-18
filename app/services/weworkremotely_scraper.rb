@@ -3,58 +3,67 @@ class WeworkremotelyScraper < BaseScraper
   def parse(document)
     document.css('section.jobs article ul li:not(:first-child)').each do |li|
       job = {}
-      links = li.css('a')
       base_url = 'https://weworkremotely.com'
+      links = li.css('a')
+
       job[:link] = "#{base_url}#{links[1]['href']}" if links.length > 1
 
-      company_title = li.css('span:first-child.company').text
-      job[:company_title] = company_title if company_title != ''
-      job[:title] = li.css('span.title').text
-      time = li.css('span:not(:first-child).company')
-      time = time.map { |time_node| time_node.text.strip }
-      job[:time] = time[0]
-
-      job[:location] = li.css('span.region.company').text
-      job[:date] = li.css('span.date time').text
-      job[:featured] = li.css('span.featured').text
+      job[:company_title] = li.css('span:first-child.company').text.strip
+      job[:title] = li.css('span.title').text.strip
+      job[:time] = li.css('span:not(:first-child).company').map(&:text).map(&:strip).first
+      job[:location] = li.css('span.region.company').text.strip
+      job[:date] = li.css('span.listing-date__date').text.strip
+      job[:featured] = li.css('span.featured').text.strip
 
       logo_section = li.css('div.tooltip--flag-logo a')
-      company_href_urls = logo_section.map { |link| link['href'] }
+      job[:company_link] = "#{base_url}#{logo_section.first['href']}" if logo_section.any?
 
-      job[:company_link] = "#{base_url}#{company_href_urls[0]}"
+      job[:logo] = extract_logo_from_style(logo_section)
 
-      background_image_urls = logo_section.css('div.flag-logo').map do |anchor|
-        style_attr = anchor.attribute('style')
-        if style_attr
-          style_attr.value.match(/background-image:\s*url\((['"]?)([^'"]+)\1\)/)
-          ::Regexp.last_match(2) # The matched background image URL
-        end
-      end
-
-      job[:logo] = background_image_urls[0]
-
+      # Required fields validation
       required_keys = %i[title company_title link]
-
       if required_keys.all? { |key| job[key].to_s.strip.present? }
-        # All required fields are present and non-empty
-        job_post = JobPost.new(
-          title: job[:title],
-          link: job[:link],
-          company_title: job[:company_title],
-          company_link: job[:company_link],
-          time: job[:time],
-          location: job[:location],
-          date: job[:date],
-          featured: job[:featured],
-          logo: job[:logo]
-        )
-        if job_post.save
-          @logger.info "Saved #{job_post}"
-        else
-          @logger.error "Failed to save #{job_post.errors.full_messages}"
-        end
+        handle_job_post(job)
       else
-        @logger.warn "One or more required fields are missing or empty #{job}"
+        @logger.warn "One or more required fields are missing or empty: #{job.inspect}"
+      end
+    end
+  end
+
+  private
+
+  def extract_logo_from_style(logo_section)
+    logo_section.css('div.flag-logo').map do |anchor|
+      style_attr = anchor.attribute('style')
+      if style_attr
+        match = style_attr.value.match(/background-image:\s*url\((['"]?)([^'"]+)\1\)/)
+        match[2] if match
+      end
+    end.compact.first
+  end
+
+  def handle_job_post(job)
+    job_post = JobPost.find_by(title: job[:title], link: job[:link])
+
+    if job_post
+      @logger.warn "Existing record for #{job}"
+    else
+      job_post = JobPost.new(
+        title: job[:title],
+        link: job[:link],
+        company_title: job[:company_title],
+        company_link: job[:company_link],
+        time: job[:time],
+        location: job[:location],
+        date: job[:date],
+        featured: job[:featured],
+        logo: job[:logo]
+      )
+
+      if job_post.save
+        @logger.info "Saved #{job_post}"
+      else
+        @logger.error "Failed to save #{job_post.errors.full_messages.join(', ')}"
       end
     end
   end
