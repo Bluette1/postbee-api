@@ -48,3 +48,5 @@ gem 'sidekiq-scheduler'  # For scheduling recurring jobs
 gem 'nokogiri'
 gem 'httparty'
 gem 'rubocop'
+gem 'rack-cors', require: 'rack/cors'
+
