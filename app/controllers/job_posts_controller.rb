@@ -16,6 +16,7 @@
     def create
       @job_post = JobPost.new(job_post_params)
       if @job_post.save
+        RabbitmqProducer.publish("queue", "Hello, a new job has been posted!")
         render json: @job_post, status: :created
       else
         render json: @job_post.errors, status: :unprocessable_entity
