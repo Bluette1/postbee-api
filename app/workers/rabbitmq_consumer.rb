@@ -14,6 +14,8 @@ class RabbitmqConsumer
       queue.subscribe(block: true) do |_delivery_info, _properties, body|
         puts "Received #{body}"
         # Process your message here
+
+        channel.ack(delivery_info.delivery_tag)
       end
     rescue Interrupt => _
       channel.close
