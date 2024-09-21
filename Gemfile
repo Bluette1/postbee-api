@@ -50,4 +50,6 @@ gem 'httparty'
 gem 'rubocop'
 gem 'rack-cors', require: 'rack/cors'
 gem 'dotenv-rails'
+gem 'devise'
+gem 'devise-api'
 
