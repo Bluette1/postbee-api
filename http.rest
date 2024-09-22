@@ -1,6 +1,48 @@
 POST http://localhost:3000/job_posts
 Content-Type: application/json
+Authorization: Bearer ____ACCESS_TOKEN
 
 {
 
 }
+
+
+###
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "user": {
+    "email": "job.sacha@gmail.com",
+    "password": "yourpassword",
+    "password_confirmation": "yourpassword"
+  }
+}
+
+###
+POST http://localhost:3000/users/sign_in
+Content-Type: application/json
+
+{
+    "email": "job.sacha@gmail.com",
+    "password": "yourpassword"
+
+}
+
+
+
+###
+DELETE  http://localhost:3000/users/sign_out
+Authorization: Bearer ____REFRESH_TOKEN
+Content-Type: application/json
+
+{
+  "user": {
+    "email": "job.sacha@gmail.com"
+  }
+}
+
+
+
+
+
