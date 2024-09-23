@@ -27,4 +27,9 @@ class Token
   def self.valid?(token)
     token.expires_at > Time.current
   end
+
+  # Custom method to check if a token exists
+  def self.token_exists?(token)
+    where(access_token: token).exists?
+  end
 end

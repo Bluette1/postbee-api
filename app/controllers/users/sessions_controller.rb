@@ -1,4 +1,5 @@
 class Users::SessionsController < Devise::SessionsController
+  before_action :authenticate_user!, only: [:destroy]
   def create
     auth_params = params.require(:user).permit(:email, :password)
 
@@ -14,10 +15,10 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def destroy
-    user = User.find_by(id: params[:id])
+    current_user = request.env['CURRENT_USER']
 
-    if user
-      user.invalidate_tokens
+    if current_user
+      current_user.invalidate_tokens
       render json: { message: 'Logged out' }, status: :ok
     else
       render json: { errors: ['User not found'] }, status: :not_found
@@ -40,5 +41,15 @@ class Users::SessionsController < Devise::SessionsController
     # Override respond_to to disable it for this controller
     # This effectively makes sure no format-based responses are attempted
     # No action is needed, as we handle responses manually.
+  end
+
+  private
+
+  def authenticate_user!
+    @current_user = request.env['CURRENT_USER']
+
+    return if @current_user
+
+    render json: { errors: ['Unauthorized'] }, status: :unauthorized
   end
 end
