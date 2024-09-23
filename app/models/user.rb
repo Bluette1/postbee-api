@@ -22,4 +22,8 @@ class User
   def invalidate_tokens
     tokens.delete_all
   end
+
+  def refresh_tokens
+    generate_access_tokens  # Generate new tokens
+  end
 end
