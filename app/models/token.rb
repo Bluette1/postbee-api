@@ -15,15 +15,14 @@ class Token
     expires_at = 1.hour.from_now
 
     user.tokens.create(
-      access_token: access_token,
-      refresh_token: refresh_token,
-      expires_at: expires_at
+      access_token:,
+      refresh_token:,
+      expires_at:
     )
 
-    { access_token: access_token, refresh_token: refresh_token }
+    { access_token:, refresh_token: }
   end
 
-  # Validate the token
   def self.valid?(token)
     token.expires_at > Time.current
   end

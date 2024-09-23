@@ -15,8 +15,6 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def destroy
-    current_user = request.env['CURRENT_USER']
-
     if current_user
       current_user.invalidate_tokens
       render json: { message: 'Logged out' }, status: :ok
@@ -45,11 +43,20 @@ class Users::SessionsController < Devise::SessionsController
 
   private
 
+  def current_user
+    @current_user ||= authenticate_user!
+  end
+
   def authenticate_user!
-    @current_user = request.env['CURRENT_USER']
+    if request.env['CURRENT_USER']
+      @current_user = request.env['CURRENT_USER']
+    else
+      render json: { errors: ['Unauthorized'] }, status: :unauthorized
+    end
+  end
 
-    return if @current_user
-
-    render json: { errors: ['Unauthorized'] }, status: :unauthorized
+  def valid_token?(token)
+    token_record = Token.where(access_token: token).first
+    Token.valid?(token_record)
   end
 end
