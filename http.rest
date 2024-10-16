@@ -24,8 +24,22 @@ POST http://localhost:3000/users/sign_in
 Content-Type: application/json
 
 {
+   "user": { 
     "email": "job.sacha@gmail.com",
     "password": "yourpassword"
+    }
+
+}
+
+###
+POST http://localhost:3000/users/sign_in
+Content-Type: application/json
+
+{
+   "user": { 
+    "email": "job.sacha@gmail.com",
+    "password": "yourpassword"
+    }
 
 }
 
@@ -33,14 +47,9 @@ Content-Type: application/json
 
 ###
 DELETE  http://localhost:3000/users/sign_out
-Authorization: Bearer ____REFRESH_TOKEN
-Content-Type: application/json
+Authorization: Bearer bca883b1a8caf1f5a6d0
 
-{
-  "user": {
-    "email": "job.sacha@gmail.com"
-  }
-}
+
 
 
 
