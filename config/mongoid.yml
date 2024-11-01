@@ -301,20 +301,31 @@
 development:
   clients:
     default:
-      uri: mongodb://localhost:27017/postbee_development
+      uri: mongodb://localhost:27017/postbee_api_development
+      options:
+        server_selection_timeout: 30
+  options:
+    raise_not_found_error: false
+
 
 test:
   clients:
     default:
-      uri: mongodb://localhost:27017/postbee_test
+      uri: mongodb://localhost:27017/postbee_api_test
+      options:
+        server_selection_timeout: 30
+  options:
+    raise_not_found_error: false
 
 production:
   clients:
     default:
       uri: <%= ENV['MONGODB_URI'] %>
       options:
-        server_selection_timeout: 5
+        server_selection_timeout: 30
         connect_timeout: 5
         socket_timeout: 5
         max_pool_size: 5
         min_pool_size: 1
+  options:
+    raise_not_found_error: false
