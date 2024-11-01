@@ -334,6 +334,7 @@ DEPENDENCIES
   sidekiq
   sidekiq-scheduler
   tzinfo-data
+  wdm (>= 0.1.0)
 
 RUBY VERSION
    ruby 3.1.2p20
