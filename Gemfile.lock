@@ -92,9 +92,6 @@ GEM
     crass (1.0.6)
     csv (3.3.0)
     date (3.3.4)
-    debug (1.9.2)
-      irb (~> 1.10)
-      reline (>= 0.3.8)
     devise (4.9.4)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -319,7 +316,6 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   bunny
-  debug
   devise
   devise-api
   dotenv-rails
