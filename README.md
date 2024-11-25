@@ -1,6 +1,6 @@
 # PostBee API
 
-PostBee is a dynamic job posting API designed to streamline job management for both employers and job seekers. This API provides functionalities for creating, managing, and applying for job postings while ensuring a smooth user experience.
+PostBee API is a dynamic job posting API designed to streamline job management for both employers and job seekers. This API provides functionalities for creating, managing, and applying for job postings while ensuring a smooth user experience.
 
 ## Table of Contents
 
