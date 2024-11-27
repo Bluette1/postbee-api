@@ -40,6 +40,7 @@ group :development, :test do
   gem 'tzinfo-data'
   gem 'wdm', '>= 0.1.0'
 end
+gem 'rspec-rails', '~> 5.0'
 end
 
 group :development do
@@ -47,6 +48,10 @@ group :development do
   # gem "spring"
 
   gem "error_highlight", ">= 0.4.0", platforms: [:ruby]
+end
+
+group :test do
+  gem 'factory_bot_rails'
 end
 
 gem 'mongoid'
