@@ -16,6 +16,12 @@ class JobPostsController < ApplicationController
     @job_post = JobPost.new(job_post_params)
     if @job_post.save
       RabbitmqProducer.publish('queue', 'Hello, a new job has been posted!')
+
+      # TODO: Change to background task
+      User.find_each do |user|
+        JobMailer.new_job_notification(user, @job_post).deliver_now
+      end
+
       render json: @job_post, status: :created
     else
       render json: @job_post.errors, status: :unprocessable_entity
