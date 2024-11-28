@@ -50,9 +50,11 @@ group :development do
 end
 
 group :test do
+  gem 'cucumber-rails', require: false
   gem 'minitest'
   gem 'database_cleaner-mongoid'
   gem 'minitest-rails'
+  gem 'rack-test' 
 end
 
 gem 'mongoid'

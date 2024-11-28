@@ -4,13 +4,15 @@ require 'rails/test_help'
 require 'minitest/autorun'
 require 'database_cleaner-mongoid'
 
-class Minitest::Test
-  def setup
+class ActiveSupport::TestCase
+  include Devise::Test::IntegrationHelpers
+
+  setup do
     DatabaseCleaner.strategy = :deletion
     DatabaseCleaner.start
   end
 
-  def teardown
+  teardown do
     DatabaseCleaner.clean
   end
 end
