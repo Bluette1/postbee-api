@@ -21,6 +21,20 @@ Content-Type: application/json
 
 
 ###
+POST http://localhost:3000/job_posts
+Content-Type: application/json
+
+ {
+    "job_post": {
+      "title": "Rubine Developer",
+      "company_title": "Techie Corp",
+      "location": "Remote",
+      "time": "Full-time",
+      "link": "https://example.com/jobs/1"
+    }
+  }
+
+###
 POST http://localhost:3000/users
 Content-Type: application/json
 
