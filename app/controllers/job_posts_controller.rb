@@ -18,8 +18,7 @@ class JobPostsController < ApplicationController
     if @job_post.save
       RabbitmqProducer.publish('queue', 'Hello, a new job has been posted!')
 
-  
-    SendJobNotificationJob.perform_later(@job_post.id)
+      SendJobNotificationJob.perform_later(@job_post.id)
 
       render json: @job_post, status: :created
     else
@@ -49,6 +48,7 @@ class JobPostsController < ApplicationController
   private
 
   def job_post_params
-    params.require(:job_post).permit(:title, :company_title, :time, :link, :location)
+    params.require(:job_post).permit(:title, :company_title, :time, :link, :location, :company_link, :tags, :badges,
+                                     :date, :logo, :featured)
   end
 end
