@@ -9,6 +9,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       yield resource if block_given?
       render json: resource, status: :created
     else
+      Rails.logger.error "User creation failed: #{@user.errors.full_messages.join(', ')}"
       render json: { errors: resource.errors.full_messages }, status: :unprocessable_entity
     end
   end
