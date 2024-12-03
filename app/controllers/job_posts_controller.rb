@@ -14,10 +14,16 @@ class JobPostsController < ApplicationController
   # POST /job_posts
   def create
     @job_post = JobPost.new(job_post_params)
+
     if @job_post.save
       RabbitmqProducer.publish('queue', 'Hello, a new job has been posted!')
+
+      SendJobNotificationJob.perform_later(@job_post.id)
+
       render json: @job_post, status: :created
     else
+      Rails.logger.error "Job creation failed: #{@job_post.errors.full_messages.join(', ')}"
+
       render json: @job_post.errors, status: :unprocessable_entity
     end
   end
@@ -42,6 +48,7 @@ class JobPostsController < ApplicationController
   private
 
   def job_post_params
-    params.require(:job_post).permit(:title, :company, :description, :link)
+    params.require(:job_post).permit(:title, :company_title, :time, :link, :location, :company_link, :tags, :badges,
+                                     :date, :logo, :featured)
   end
 end

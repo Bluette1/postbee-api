@@ -2,6 +2,8 @@
 
 PostBee API is a dynamic job posting API designed to streamline job management for both employers and job seekers. This API provides functionalities for creating, managing, and applying for job postings while ensuring a smooth user experience.
 
+[Deployed site](https://postbee-api.onrender.com)
+
 ## Table of Contents
 
 - [Features](#features)
@@ -29,6 +31,7 @@ To get started with the PostBee API, follow the instructions below.
 
 - Ruby version: 2.7 or later
 - Docker (if using Docker for deployment)
+- MongoDB
 
 ## Installation
 
@@ -76,6 +79,10 @@ To run the test suite, use:
 
 ```bash
 rails test
+```
+
+```bash
+bundle exec cucumber
 ```
 
 ## Contributing
