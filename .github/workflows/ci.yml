@@ -23,15 +23,10 @@ jobs:
           --health-timeout 10s
           --health-retries 5
       rabbitmq:  
-        image: rabbitmq:3-management 
+        image: rabbitmq:3.10-management 
         ports:
           - 5672:5672
           - 15672:15672
-        options: >-
-          --health-cmd "curl -f http://localhost:15672/ || exit 1"
-          --health-interval 5s
-          --health-timeout 10s
-          --health-retries 5
     env:
       RABBITMQ_URL: amqp://guest:guest@localhost:5672
     steps:
@@ -70,8 +65,10 @@ jobs:
             echo "Waiting for RabbitMQ to be ready..."
             sleep 2
           done
+
       - name: Check RabbitMQ logs
         run: docker logs rabbitmq || echo "RabbitMQ container is not available yet."
+
 
       - name: Run RuboCop
         run: bundle exec rubocop
