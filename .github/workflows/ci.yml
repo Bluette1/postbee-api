@@ -1,3 +1,14 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+      - feature/set-up-github-actions-16
+  pull_request:
+    branches:
+      - master
+      - feature/set-up-github-actions-16
 jobs:
   test:
     runs-on: ubuntu-latest
