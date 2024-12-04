@@ -38,7 +38,7 @@ jobs:
           bundle install
 
       - name: Check MongoDB logs
-        run: docker logs mongo
+        run: docker logs mongodb || echo "MongoDB container is not available yet."
 
       - name: Run RuboCop
         run: bundle exec rubocop
