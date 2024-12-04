@@ -65,8 +65,7 @@ Rails.application.configure do
   config.hosts << 'localhost'
   config.hosts << 'example.org'
 
-    # Action Cable configuration
-    config.action_cable.mount_path = '/cable'
-    config.action_cable.url = 'ws://localhost:3000/cable'
-  
+  # Action Cable configuration
+  config.action_cable.mount_path = '/cable'
+  config.action_cable.url = 'ws://localhost:3000/cable'
 end
