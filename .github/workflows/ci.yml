@@ -43,9 +43,6 @@ jobs:
           gem install bundler
           bundle install
 
-      - name: Clear Bundler cache
-        run: bundle clean --force
-
       - name: Run RuboCop
         run: bundle exec rubocop
 

@@ -4,7 +4,7 @@ ruby '3.1.2'
 
 # Rails and Web Server
 gem 'puma', '>= 5.0'
-gem 'rails'
+gem 'rails', '~> 7.2.2'
 
 # JSON API Building
 # gem 'jbuilder'
