@@ -23,7 +23,7 @@ jobs:
           --health-timeout 10s
           --health-retries 5
       rabbitmq:  
-        image: rabbitmq:management
+        image: rabbitmq:3-management 
         ports:
           - 5672:5672
           - 15672:15672
@@ -47,9 +47,31 @@ jobs:
         run: |
           gem install bundler
           bundle install
-
+     
+      - name: Wait for MongoDB to be ready
+        run: |
+          for i in {1..30}; do
+            if docker inspect -f '{{.State.Health.Status}}' mongodb; then
+              break
+            fi
+            echo "Waiting for MongoDB to be ready..."
+            sleep 2
+          done
+      
       - name: Check MongoDB logs
         run: docker logs mongodb || echo "MongoDB container is not available yet."
+
+      - name: Wait for RabbitMQ to be ready
+        run: |
+          for i in {1..30}; do
+            if docker inspect -f '{{.State.Health.Status}}' rabbitmq; then
+              break
+            fi
+            echo "Waiting for RabbitMQ to be ready..."
+            sleep 2
+          done
+      - name: Check RabbitMQ logs
+        run: docker logs rabbitmq || echo "RabbitMQ container is not available yet."
 
       - name: Run RuboCop
         run: bundle exec rubocop
