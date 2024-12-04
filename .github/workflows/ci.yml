@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+      - feature/set-up-github-actions-16
+  pull_request:
+    branches:
+      - master
+      - feature/set-up-github-actions-16
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      mongodb:
+        image: mongo:4.4
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongo --eval 'db.adminCommand(\"ping\")'"
+          --health-interval 5s
+          --health-timeout 10s
+          --health-retries 5
+      rabbitmq:  
+        image: rabbitmq:3.10-management 
+        ports:
+          - 5672:5672
+          - 15672:15672
+    env:
+      RABBITMQ_URL: amqp://guest:guest@localhost:5672
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1.2'
+
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install
+
+      - name: Run RuboCop
+        run: bundle exec rubocop
+
+      - name: Run Cucumber tests
+        env:
+          RAILS_ENV: test
+        run: bundle exec cucumber
+
+      - name: Run MiniTest tests
+        env:
+          RAILS_ENV: test
+        run: bundle exec rake test
+      

@@ -6,7 +6,7 @@ require 'logger'
 class BaseScraper
   def initialize(urls)
     @urls = urls
-    @logger = Logger.new(STDOUT) # Or use a file: Logger.new('log/scraper.log')
+    @logger = Logger.new($stdout) # Or use a file: Logger.new('log/scraper.log')
     @logger.level = Logger::DEBUG
   end
 

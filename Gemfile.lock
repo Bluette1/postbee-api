@@ -133,7 +133,7 @@ GEM
     database_cleaner-mongoid (2.0.1)
       database_cleaner-core (~> 2.0.0)
       mongoid
-    date (3.4.0)
+    date (3.4.1)
     devise (4.9.4)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -177,16 +177,20 @@ GEM
       dry-inflector (~> 1.0)
       dry-logic (~> 1.4)
       zeitwerk (~> 2.6)
-    error_highlight (0.6.0)
+    error_highlight (0.7.0)
     erubi (1.13.0)
     et-orbi (1.2.11)
       tzinfo
     ffi (1.17.0-aarch64-linux-gnu)
+    ffi (1.17.0-aarch64-linux-musl)
     ffi (1.17.0-arm-linux-gnu)
+    ffi (1.17.0-arm-linux-musl)
     ffi (1.17.0-arm64-darwin)
     ffi (1.17.0-x86-linux-gnu)
+    ffi (1.17.0-x86-linux-musl)
     ffi (1.17.0-x86_64-darwin)
     ffi (1.17.0-x86_64-linux-gnu)
+    ffi (1.17.0-x86_64-linux-musl)
     fugit (1.11.1)
       et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
@@ -198,13 +202,13 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
-    io-console (0.7.2)
+    io-console (0.8.0)
     irb (1.14.1)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
-    json (2.8.2)
+    json (2.9.0)
     language_server-protocol (3.17.0.3)
-    logger (1.6.1)
+    logger (1.6.2)
     loofah (2.23.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -216,7 +220,7 @@ GEM
     marcel (1.0.4)
     matrix (0.4.2)
     mini_mime (1.1.5)
-    minitest (5.25.2)
+    minitest (5.25.4)
     minitest-rails (7.1.1)
       minitest (~> 5.20)
       railties (>= 7.1.0, < 8.0.0)
@@ -240,24 +244,25 @@ GEM
     net-smtp (0.5.0)
       net-protocol
     nio4r (2.7.4)
-    nokogiri (1.16.7-aarch64-linux)
+    nokogiri (1.16.8-aarch64-linux)
       racc (~> 1.4)
-    nokogiri (1.16.7-arm-linux)
+    nokogiri (1.16.8-arm-linux)
       racc (~> 1.4)
-    nokogiri (1.16.7-arm64-darwin)
+    nokogiri (1.16.8-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.16.7-x86-linux)
+    nokogiri (1.16.8-x86-linux)
       racc (~> 1.4)
-    nokogiri (1.16.7-x86_64-darwin)
+    nokogiri (1.16.8-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.16.7-x86_64-linux)
+    nokogiri (1.16.8-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     parallel (1.26.3)
     parser (3.3.6.0)
       ast (~> 2.4.1)
       racc
-    psych (5.2.0)
+    psych (5.2.1)
+      date
       stringio
     public_suffix (6.0.1)
     puma (6.5.0)
@@ -291,9 +296,9 @@ GEM
       activesupport (>= 5.0.0)
       minitest
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.6.0)
+    rails-html-sanitizer (1.6.1)
       loofah (~> 2.21)
-      nokogiri (~> 1.14)
+      nokogiri (>= 1.15.7, != 1.16.7, != 1.16.6, != 1.16.5, != 1.16.4, != 1.16.3, != 1.16.2, != 1.16.1, != 1.16.0.rc1, != 1.16.0)
     railties (7.2.2)
       actionpack (= 7.2.2)
       activesupport (= 7.2.2)
@@ -309,29 +314,37 @@ GEM
       psych (>= 4.0.0)
     redis-client (0.22.2)
       connection_pool
-    regexp_parser (2.9.2)
-    reline (0.5.11)
+    regexp_parser (2.9.3)
+    reline (0.5.12)
       io-console (~> 0.5)
     responders (3.1.1)
       actionpack (>= 5.2)
       railties (>= 5.2)
-    rubocop (1.69.0)
+    rubocop (1.69.1)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
       parser (>= 3.3.0.2)
       rainbow (>= 2.2.2, < 4.0)
-      regexp_parser (>= 2.4, < 3.0)
-      rubocop-ast (>= 1.36.1, < 2.0)
+      regexp_parser (>= 2.9.3, < 3.0)
+      rubocop-ast (>= 1.36.2, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 4.0)
     rubocop-ast (1.36.2)
       parser (>= 3.3.1.0)
+    rubocop-minitest (0.36.0)
+      rubocop (>= 1.61, < 2.0)
+      rubocop-ast (>= 1.31.1, < 2.0)
+    rubocop-rails (2.27.0)
+      activesupport (>= 4.2.0)
+      rack (>= 1.1)
+      rubocop (>= 1.52.0, < 2.0)
+      rubocop-ast (>= 1.31.1, < 2.0)
     ruby-progressbar (1.13.0)
     rufus-scheduler (3.9.2)
       fugit (~> 1.1, >= 1.11.1)
-    securerandom (0.3.2)
-    set (1.1.0)
+    securerandom (0.4.0)
+    set (1.1.1)
     sidekiq (7.3.6)
       connection_pool (>= 2.3.0)
       logger
@@ -355,7 +368,7 @@ GEM
     unicode-display_width (3.1.2)
       unicode-emoji (~> 4.0, >= 4.0.4)
     unicode-emoji (4.0.4)
-    useragent (0.16.10)
+    useragent (0.16.11)
     warden (1.2.9)
       rack (>= 2.0.9)
     websocket-driver (0.7.6)
@@ -367,11 +380,18 @@ GEM
 
 PLATFORMS
   aarch64-linux
+  aarch64-linux-gnu
+  aarch64-linux-musl
   arm-linux
+  arm-linux-gnu
+  arm-linux-musl
   arm64-darwin
   x86-linux
+  x86-linux-gnu
+  x86-linux-musl
   x86_64-darwin
-  x86_64-linux
+  x86_64-linux-gnu
+  x86_64-linux-musl
 
 DEPENDENCIES
   bootsnap
@@ -390,8 +410,10 @@ DEPENDENCIES
   puma (>= 5.0)
   rack-cors
   rack-test
-  rails
+  rails (~> 7.2.2)
   rubocop
+  rubocop-minitest
+  rubocop-rails
   sidekiq
   sidekiq-scheduler
   tzinfo-data
