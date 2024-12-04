@@ -1,15 +1,3 @@
-name: CI
-
-on:
-  push:
-    branches:
-      - master
-      - feature/set-up-github-actions-16
-  pull_request:
-    branches:
-      - master
-      - feature/set-up-github-actions-16
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -20,9 +8,9 @@ jobs:
           - 27017:27017
         options: >-
           --health-cmd "mongo --eval 'db.adminCommand(\"ping\")'"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 3
+          --health-interval 5s
+          --health-timeout 10s
+          --health-retries 5
 
     steps:
       - name: Checkout code
@@ -37,6 +25,9 @@ jobs:
         run: |
           gem install bundler
           bundle install
+
+      - name: Check MongoDB logs
+        run: docker logs mongo
 
       - name: Run RuboCop
         run: bundle exec rubocop
