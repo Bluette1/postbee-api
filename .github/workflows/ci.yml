@@ -38,13 +38,13 @@ jobs:
         with:
           ruby-version: '3.1.2'
 
-      - name: Clear Bundler cache
-        run: bundle clean --force
-
       - name: Install dependencies
         run: |
           gem install bundler
           bundle install
+
+      - name: Clear Bundler cache
+        run: bundle clean --force
 
       - name: Run RuboCop
         run: bundle exec rubocop
