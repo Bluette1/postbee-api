@@ -1,11 +1,11 @@
 require 'test_helper'
 
 class JobPostsControllerTest < Minitest::Test
-  include Rack::Test::Methods 
+  include Rack::Test::Methods
   include ActiveJob::TestHelper
 
   def setup
-    @app = Rails.application 
+    @app = Rails.application
     @job_post = JobPost.create!(
       title: 'Ruby Developer',
       company_title: 'Tech Corp',

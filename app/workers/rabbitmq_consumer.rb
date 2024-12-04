@@ -17,7 +17,7 @@ class RabbitmqConsumer
 
         channel.ack(delivery_info.delivery_tag)
       end
-    rescue Interrupt => _
+    rescue Interrupt => _e
       channel.close
       connection.close
     end

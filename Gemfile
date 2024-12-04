@@ -1,71 +1,67 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-ruby "3.1.2"
+ruby '3.1.2'
 
-# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails"
+# Rails and Web Server
+gem 'puma', '>= 5.0'
+gem 'rails'
 
-# Use the Puma web server [https://github.com/puma/puma]
-gem "puma", ">= 5.0"
+# JSON API Building
+# gem 'jbuilder'
 
-# Build JSON APIs with ease [https://github.com/rails/jbuilder]
-# gem "jbuilder"
+# Redis Support
+# gem 'redis', '>= 4.0.1'
+# gem 'kredis'
 
-# Use Redis adapter to run Action Cable in production
-# gem "redis", ">= 4.0.1"
+# Password Security
+# gem 'bcrypt', '~> 3.1.7'
 
-# Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
-# gem "kredis"
-
-# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-# gem "tzinfo-data", platforms: %i[ windows jruby ]
+# Time Zone Data for Windows
 platforms :mingw, :x64_mingw, :mswin do
   gem 'tzinfo-data'
   gem 'wdm', '>= 0.1.0'
 end
 
-# Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", require: false
+# Boot Time Optimization
+gem 'bootsnap', require: false
 
-# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
-# gem "rack-cors"
+# CORS Middleware
+# gem 'rack-cors'
 
+# Development and Test Group
 group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  # gem "debug", platforms: %i[ mri windows ]
-  platforms :mingw, :x64_mingw, :mswin do
-  gem 'tzinfo-data'
-  gem 'wdm', '>= 0.1.0'
-end
-end
+  # Debugging Tools
+  # gem 'debug', platforms: %i[mri windows]
 
-group :development do
-  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
-
-  gem "error_highlight", ">= 0.4.0", platforms: [:ruby]
-end
-
-group :test do
+  # Test Frameworks
   gem 'cucumber-rails', require: false
-  gem 'minitest'
   gem 'database_cleaner-mongoid'
+  gem 'minitest'
   gem 'minitest-rails'
-  gem 'rack-test' 
+  gem 'rack-test'
 end
 
-gem 'mongoid'
-gem 'bunny'
-gem 'sidekiq'
-gem 'sidekiq-scheduler'  # For scheduling recurring jobs
-gem 'nokogiri'
-gem 'httparty'
-gem 'rubocop'
-gem 'rack-cors', require: 'rack/cors'
-gem 'dotenv-rails'
-gem 'devise'
-gem 'devise-api'
+# Development Group
+group :development do
+  # Speed Up Commands
+  # gem 'spring'
 
+  gem 'error_highlight', '>= 0.4.0', platforms: [:ruby]
+  gem 'rubocop', require: false
+
+  # Linters
+  gem 'rubocop-minitest'
+  gem 'rubocop-rails'
+end
+
+# Other Gems
+gem 'bunny'                 # RabbitMQ client
+gem 'devise'                # Authentication solution
+gem 'devise-api'           # API support for Devise
+gem 'dotenv-rails'         # Environment variables from .env
+gem 'httparty'             # Makes HTTP requests easy
+gem 'mongoid'              # MongoDB ODM
+gem 'nokogiri'             # HTML and XML parsing
+gem 'rack-cors', require: 'rack/cors' # CORS handling
+gem 'sidekiq' # Background job processing
+gem 'sidekiq-scheduler' # Scheduling recurring jobs

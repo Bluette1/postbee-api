@@ -15,7 +15,7 @@ class User
          :recoverable, :rememberable, :validatable, :api
 
   def generate_access_tokens
-    tokens.delete_all  # Remove old tokens
+    tokens.delete_all # Remove old tokens
     Token.generate_tokens(self)
   end
 
@@ -24,6 +24,6 @@ class User
   end
 
   def refresh_tokens
-    generate_access_tokens  # Generate new tokens
+    generate_access_tokens # Generate new tokens
   end
 end
