@@ -45,12 +45,8 @@ jobs:
 
       - name: Set up dependencies
         run: |
-          sudo gem update --system
           gem install bundler
-          bundle config set --local deployment 'true'
-          bundle config set --local path 'vendor/bundle'
-          bundle install --jobs 4
-
+          bundle install 
 
       - name: Run RuboCop
         run: bundle exec rubocop
