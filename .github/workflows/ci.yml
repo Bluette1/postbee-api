@@ -9,6 +9,7 @@ on:
     branches:
       - master
       - feature/set-up-github-actions-16
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -27,32 +28,32 @@ jobs:
         ports:
           - 5672:5672
           - 15672:15672
+    
     env:
       RABBITMQ_URL: amqp://guest:guest@localhost:5672
+      MONGODB_URI: mongodb://localhost:27017/postbee_api_test
+      RAILS_ENV: test
+      
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.1.2'
+          bundler-cache: false
 
-      - name: Install dependencies
+      - name: Set up dependencies
         run: |
           gem install bundler
-          bundle install
+          bundle install 
 
       - name: Run RuboCop
         run: bundle exec rubocop
 
       - name: Run Cucumber tests
-        env:
-          RAILS_ENV: test
         run: bundle exec cucumber
 
       - name: Run MiniTest tests
-        env:
-          RAILS_ENV: test
         run: bundle exec rake test
-      

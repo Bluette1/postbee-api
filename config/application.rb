@@ -5,6 +5,8 @@ require 'action_mailer/railtie'
 require 'action_view/railtie'
 require 'rails/test_unit/railtie'
 require_relative '../app/middleware/authenticate_token'
+require 'action_cable/engine'
+require 'mongoid'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -22,6 +24,11 @@ module PostbeeApi
     config.autoload_lib(ignore: %w[assets tasks])
     config.autoload_paths << Rails.root.join('app/middleware')
     config.eager_load_paths << Rails.root.join('app/middleware')
+
+    # Configure Mongoid as your ODM
+    config.generators do |g|
+      g.orm :mongoid
+    end
 
     # Configuration for the application, engines, and railties goes here.
     #

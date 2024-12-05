@@ -55,6 +55,7 @@ group :development do
 end
 
 # Other Gems
+gem 'actioncable'
 gem 'bunny'                 # RabbitMQ client
 gem 'devise'                # Authentication solution
 gem 'devise-api'           # API support for Devise
