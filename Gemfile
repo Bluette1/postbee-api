@@ -39,6 +39,7 @@ group :development, :test do
   gem 'minitest'
   gem 'minitest-rails'
   gem 'rack-test'
+  gem 'activerecord-nulldb-adapter'
 end
 
 # Development Group

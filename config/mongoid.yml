@@ -311,7 +311,7 @@ development:
 test:
   clients:
     default:
-      uri: <%= ENV['MONGODB_URI'] %>
+      uri: <%= ENV['MONGODB_URI'] || 'mongodb://localhost:27017/postbee_api_test' %>
       options:
         server_selection_timeout: 30
   options:
