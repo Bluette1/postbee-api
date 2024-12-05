@@ -34,12 +34,12 @@ group :development, :test do
   # gem 'debug', platforms: %i[mri windows]
 
   # Test Frameworks
+  gem 'activerecord-nulldb-adapter'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner-mongoid'
   gem 'minitest'
   gem 'minitest-rails'
   gem 'rack-test'
-  gem 'activerecord-nulldb-adapter'
 end
 
 # Development Group
