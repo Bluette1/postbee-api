@@ -41,13 +41,16 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.1.2'
-          bundler-cache: true
+          bundler-cache: false
 
-      - name: Update RubyGems and install dependencies
+      - name: Set up dependencies
         run: |
-          gem update --system 3.3.22
+          sudo gem update --system
           gem install bundler
-          bundle install
+          bundle config set --local deployment 'true'
+          bundle config set --local path 'vendor/bundle'
+          bundle install --jobs 4
+
 
       - name: Run RuboCop
         run: bundle exec rubocop
