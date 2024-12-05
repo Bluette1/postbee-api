@@ -35,7 +35,7 @@ jobs:
       
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -43,8 +43,9 @@ jobs:
           ruby-version: '3.1.2'
           bundler-cache: true
 
-      - name: Install dependencies
+      - name: Update RubyGems and install dependencies
         run: |
+          gem update --system 3.3.22
           gem install bundler
           bundle install
 
