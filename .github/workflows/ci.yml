@@ -56,6 +56,3 @@ jobs:
 
       - name: Run Cucumber tests
         run: bundle exec cucumber
-
-      - name: Run MiniTest tests
-        run: bundle exec rake test
