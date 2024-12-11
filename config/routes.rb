@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   # Resources for job posts
   resources :job_posts
 
+  post '/validate_token', to: 'tokens#validate'
+
   # Devise routes for users
   devise_for :users, controllers: {
     sessions: 'users/sessions',
