@@ -6,8 +6,10 @@ class WeworkremotelyScraper < BaseScraper
       base_url = 'https://weworkremotely.com'
       links = li.css('a')
 
-      job[:link] = "#{base_url}#{links[1]['href']}" if links.length > 1
-
+      if links.length > 1
+        href = links[1]['href']
+        job[:link] = href.start_with?('/') ? "#{base_url}#{href}" : href
+      end
       job[:company_title] = li.css('span:first-child.company').text.strip
       job[:title] = li.css('span.title').text.strip
       job[:time] = li.css('span:not(:first-child).company').map(&:text).map(&:strip).first

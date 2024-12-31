@@ -2,8 +2,9 @@ Rails.application.routes.draw do
   # Health check endpoint
   get 'up' => 'rails/health#show', as: :rails_health_check
 
-  # Resources for job posts
-  resources :job_posts
+  resources :job_posts do
+    post 'increment_view_count', on: :member
+  end
 
   post '/validate_token', to: 'tokens#validate'
 
