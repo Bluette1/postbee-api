@@ -11,6 +11,19 @@ class JobPostsController < ApplicationController
     render json: @job_post
   end
 
+  def increment_view_count
+    job_post = JobPost.find(params[:id])
+
+    job_post.view_count += 1
+    job_post.last_viewed = Time.current
+    job_post.save
+
+    render json: {
+      view_count: job_post.view_count,
+      last_viewed: job_post.last_viewed.iso8601
+    }, status: :ok
+  end
+
   # POST /job_posts
   def create
     @job_post = JobPost.new(job_post_params)
