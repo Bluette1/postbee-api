@@ -14,6 +14,8 @@ class RemoteOkScraper < BaseScraper
 
       job[:company_link] = "#{base_url}/#{company_title.downcase.tr(' ', '-')}" if company_title.present?
 
+      # Override job link for Remote Ok with company link
+      job[:link] = job[:company_link]
       job[:date] = card.css('time').text.strip
 
       logo = card.css('img.logo')
