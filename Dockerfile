@@ -2,7 +2,7 @@
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
 ARG RUBY_VERSION=3.1.2
-FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
+FROM ruby:$RUBY_VERSION-slim as base
 
 # Rails app lives here
 WORKDIR /rails
@@ -13,7 +13,6 @@ ENV RAILS_ENV="production" \
     BUNDLE_PATH="/usr/local/bundle" \
     BUNDLE_WITHOUT="development"
 
-
 # Throw-away build stage to reduce size of final image
 FROM base as build
 
@@ -21,10 +20,13 @@ FROM base as build
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential git pkg-config
 
+# Update RubyGems to the latest version before installing gems
+RUN gem update --system
+
 # Install application gems
 COPY Gemfile Gemfile.lock ./
 RUN bundle install && \
-    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
+    rm -rf ~/.bundle/ "${BUNDLE_PATH}/ruby/*/cache" "${BUNDLE_PATH}/ruby/*/bundler/gems/*/.git" && \
     bundle exec bootsnap precompile --gemfile
 
 # Copy application code
@@ -32,7 +34,6 @@ COPY . .
 
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
-
 
 # Final stage for app image
 FROM base
