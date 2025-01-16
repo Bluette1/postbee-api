@@ -1,0 +1,11 @@
+<h1>Hi <%= @user.name %>,</h1>
+
+<p>We found some job recommendations for you based on your recent application:</p>
+
+<ul>
+  <% @job_recommendations.each do |job| %>
+    <li><%= job.title %> at <%= job.company.name %></li>
+  <% end %>
+</ul>
+
+<p>Best of luck!</p>

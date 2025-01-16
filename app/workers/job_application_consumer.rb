@@ -23,6 +23,13 @@ class JobApplicationConsumer
   end
 
   def send_email_recommendations(user_id, job_id)
-    # Implement email sending logic here
+    user = User.find(user_id) # Find user by ID
+    job = Job.find(job_id) # Find the applied job
+
+    # Fetch job recommendations based on the same company and job role type
+    job_recommendations = Job.where(company_id: job.company_id, role_type: job.role_type).limit(5)
+
+    # Send email with job recommendations
+    JobRecommendationMailer.send_job_recommendations(user, job_recommendations).deliver_now
   end
 end
