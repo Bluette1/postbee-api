@@ -10,5 +10,5 @@
 
     send_job_recommendations:
       cron: "* * * * *"
-      # cron: "0 0 1 */4"  # This runs on the first day of every 4 months at midnight
+      cron: "0 0 * * *"  
       class: "SendJobRecommendationsJob"
