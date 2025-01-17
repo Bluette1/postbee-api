@@ -85,6 +85,94 @@ rails test
 bundle exec cucumber
 ```
 
+
+## Configuring the Mailer
+
+To set up the mailer in your Rails application, follow these steps:
+
+1. **Set up Action Mailer**:
+   Ensure you have Action Mailer configured in your `config/environments/development.rb` (or `production.rb` for production settings). Here’s a basic configuration:
+
+   ```ruby
+   # config/environments/development.rb
+   config.action_mailer.delivery_method = :smtp
+   config.action_mailer.smtp_settings = {
+        address: 'smtp.example.com',
+    port: 587,
+    domain: ENV['MAIL_HOST'],
+    user_name: ENV['SENDMAIL_USERNAME'],
+    password: ENV['SENDMAIL_PASSWORD'],
+    authentication: 'plain',
+    enable_starttls_auto: true
+   }
+   ```
+
+   Replace the placeholders with your SMTP server details.
+
+2. **Set the Host for URL Generation**:
+   In the same environment configuration file, set the default URL options:
+
+   ```ruby
+   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+   ```
+
+   Adjust the host and port as necessary for your environment.
+
+## Running Sidekiq
+
+Sidekiq is used for background job processing in your Rails application. To run Sidekiq, follow these steps:
+
+1. **Install Sidekiq**:
+   Ensure you have Sidekiq added to your Gemfile:
+
+   ```ruby
+   gem 'sidekiq'
+   ```
+
+   Run `bundle install` to install the gem.
+
+2. **Configure Sidekiq**:
+   Create a configuration file for Sidekiq if you haven't already. You can create `config/sidekiq.yml`:
+
+   ```yaml
+   :concurrency: 5
+   :queues:
+     - default
+   ```
+
+   Adjust the concurrency and queues as needed.
+
+3. **Start Redis**:
+   Sidekiq requires Redis to manage background jobs. Make sure you have Redis installed and running. You can start Redis with:
+
+   ```bash
+   redis-server
+   ```
+
+4. **Start Sidekiq**:
+   In your terminal, navigate to your Rails application directory and run:
+
+   ```bash
+   bundle exec sidekiq
+   ```
+
+   This will start Sidekiq, and it will begin processing jobs in the background.
+
+5. **Monitoring Sidekiq**:
+   To monitor the Sidekiq dashboard, you can add a route in your `config/routes.rb`:
+
+   ```ruby
+   require 'sidekiq/web'
+   mount Sidekiq::Web => '/sidekiq'
+   ```
+
+   You can access the dashboard by navigating to `http://localhost:3000/sidekiq` in your browser.
+
+
+### Summary
+
+These instructions should help users configure the mailer and run Sidekiq in your Rails application. Feel free to customize any parts of this text to better fit your project's needs! If you need any more additions or modifications, let me know!
+
 ## Contributing
 
 We welcome contributions to improve PostBee! Please follow these steps:
