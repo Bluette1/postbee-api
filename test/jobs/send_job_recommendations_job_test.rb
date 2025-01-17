@@ -1,4 +1,4 @@
-require "test_helper"
+require 'test_helper'
 
 describe SendJobRecommendationsJob do
   # it "does a thing" do
