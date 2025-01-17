@@ -4,6 +4,6 @@ class JobRecommendationMailer < ApplicationMailer
   def send_job_recommendations(user, job_recommendations)
     @user = user
     @job_recommendations = job_recommendations
-    mail(to: @user.email, subject: 'Job Recommendations for You')
+    mail(to: @user.email, subject: 'Job Recommendations from PostBee')
   end
 end
