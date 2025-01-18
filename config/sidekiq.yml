@@ -9,6 +9,5 @@
       class: "JobScraperJob"
 
     send_job_recommendations:
-      cron: "* * * * *"
       cron: "0 0 * * *"  
       class: "SendJobRecommendationsJob"
