@@ -1,0 +1,15 @@
+<p>Hi,</p>
+
+<p>We found some job recommendations for you based on your recent application:</p>
+
+<ul>
+  <% @job_recommendations.each do |job| %>
+    <li>
+      <a href="<%= "#{BASE_URL}/job-posts/#{slugify(job.title, job.company_title)}" %>">
+        <%= job.title %> at <%= job.company_title %>
+      </a>
+    </li>
+  <% end %>
+</ul>
+
+<p>Best of luck!</p>

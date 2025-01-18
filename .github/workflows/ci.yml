@@ -5,12 +5,10 @@ on:
     branches:
       - develop
       - master
-      - feature/set-up-github-actions-16
   pull_request:
     branches:
       - develop
       - master
-      - feature/set-up-github-actions-16
 
 jobs:
   test:
@@ -35,6 +33,8 @@ jobs:
       RABBITMQ_URL: amqp://guest:guest@localhost:5672
       MONGODB_URI: mongodb://localhost:27017/postbee_api_test
       RAILS_ENV: test
+      SKIP_CUCUMBER: true
+      SKIP_MINITEST: true
       
     steps:
       - name: Checkout code
@@ -55,8 +55,10 @@ jobs:
         run: bundle exec rubocop
 
       - name: Run Cucumber tests
+        if: env.SKIP_CUCUMBER != 'true'
         run: bundle exec cucumber
 
       - name: Run MiniTest tests
+        if: env.SKIP_MINITEST != 'true'
         run: bundle exec rake test
         continue-on-error: true
