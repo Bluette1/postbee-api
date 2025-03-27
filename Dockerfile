@@ -54,7 +54,7 @@ USER rails:rails
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Expose the port the app runs on
-EXPOSE 10000
+EXPOSE $PORT
 
 # Start the server by default, this can be overwritten at runtime
 CMD ["sh", "-c", "./bin/rails server -b 0.0.0.0 -p $PORT"]
