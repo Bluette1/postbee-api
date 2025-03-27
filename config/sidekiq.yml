@@ -4,11 +4,11 @@
 
 :scheduler:
   :schedule:
-    job_scraper_worker_once:        # Renamed to avoid conflict
-      cron: "30 10 27 3 *"          # Runs at 10:30 AM on March 27
+    job_scraper_worker_every_minute:
+      cron: "* * * * *"          # Runs every minute
       class: "JobScraperJob"
 
-    job_scraper_worker:              # This runs every 12 hours
+    job_scraper_worker:             # This runs every 12 hours
       cron: "0 */12 * * *"
       class: "JobScraperJob"
 
