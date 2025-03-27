@@ -66,3 +66,4 @@ gem 'nokogiri'             # HTML and XML parsing
 gem 'rack-cors', require: 'rack/cors' # CORS handling
 gem 'sidekiq' # Background job processing
 gem 'sidekiq-scheduler' # Scheduling recurring jobs
+gem 'sprockets-rails'

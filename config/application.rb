@@ -43,5 +43,6 @@ module PostbeeApi
     # Skip views, helpers and assets when generating a new resource.
     config.middleware.use AuthenticateToken
     config.api_only = true
+    config.assets.enabled = true
   end
 end
