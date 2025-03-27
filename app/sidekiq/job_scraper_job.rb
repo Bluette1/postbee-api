@@ -9,8 +9,8 @@ class JobScraperJob
       'https://weworkremotely.com/categories/remote-back-end-programming-jobs#job-listings'
     ]
     remote_co_urls = [
-      'https://remote.co/remote-jobs/developer/',
-      'https://remote.co/remote-jobs/developer/page/2/'
+      'https://remote.co/remote-jobs/developer/'
+
     ]
     remote_ok_urls = ['https://remoteok.com/remote-dev-jobs']
 

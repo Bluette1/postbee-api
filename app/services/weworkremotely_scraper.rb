@@ -10,8 +10,10 @@ class WeworkremotelyScraper < BaseScraper
         href = links[1]['href']
         job[:link] = href.start_with?('/') ? "#{base_url}#{href}" : href
       end
-      job[:company_title] = li.css('span:first-child.company').text.strip
-      job[:title] = li.css('span.title').text.strip
+      job[:company_title] = li.css('p.new-listing__company-name').text.strip
+
+      job[:title] = li.css('h4.new-listing__header__title').text.strip
+
       job[:time] = li.css('span:not(:first-child).company').map(&:text).map(&:strip).first
       job[:location] = li.css('span.region.company').text.strip
       job[:date] = li.css('span.listing-date__date').text.strip
@@ -35,7 +37,7 @@ class WeworkremotelyScraper < BaseScraper
   private
 
   def extract_logo_from_style(logo_section)
-    logo_section.css('div.flag-logo').map do |anchor|
+    logo_section.css('div.tooltip--flag-logo__flag-logo').map do |anchor|
       style_attr = anchor.attribute('style')
       if style_attr
         match = style_attr.value.match(/background-image:\s*url\((['"]?)([^'"]+)\1\)/)
