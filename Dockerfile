@@ -1,5 +1,3 @@
-# syntax = docker/dockerfile:1
-
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
 ARG RUBY_VERSION=3.1.2
 FROM ruby:$RUBY_VERSION-slim as base
@@ -55,6 +53,8 @@ USER rails:rails
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
-# Start the server by default, this can be overwritten at runtime
+# Expose the port the app runs on
 EXPOSE 3000
-CMD ["./bin/rails", "server"]
+
+# Start the server by default, this can be overwritten at runtime
+CMD ["./bin/rails", "server", "-b", "0.0.0.0", "-p", "3000"]
