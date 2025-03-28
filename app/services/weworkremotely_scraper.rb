@@ -16,7 +16,8 @@ class WeworkremotelyScraper < BaseScraper
 
       job[:time] = li.css('span:not(:first-child).company').map(&:text).map(&:strip).first
       job[:location] = li.css('span.region.company').text.strip
-      job[:date] = li.css('span.listing-date__date').text.strip
+      job[:date] = li.css('p.new-listing__header__icons__date').text.strip
+
       job[:featured] = li.css('span.featured').text.strip
 
       logo_section = li.css('div.tooltip--flag-logo a')
@@ -51,6 +52,10 @@ class WeworkremotelyScraper < BaseScraper
 
     if job_post
       @logger.warn "Existing record for #{job}"
+      
+      # Update the date if the job already exists
+      job_post.update(date: job[:date])
+      @logger.info "Updated date for #{job_post}"
     else
       job_post = JobPost.new(
         title: job[:title],

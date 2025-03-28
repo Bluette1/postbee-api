@@ -30,6 +30,10 @@ class RemoteOkScraper < BaseScraper
 
         if job_post
           @logger.warn "Existing record for #{job[:title]} at #{job[:link]}"
+          
+          # Update the date if the job already exists
+          job_post.update(date: job[:date])
+          @logger.info "Updated date for #{job_post}"
         else
           job_post = JobPost.new(
             title: job[:title],
