@@ -5,5 +5,5 @@
 :scheduler:
   :schedule:
     job_scraper_worker:
-      cron: "0 */12 * * *"
+      cron: "0 */15 * * *"
       class: "JobScraperJob"
