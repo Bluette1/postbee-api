@@ -26,7 +26,7 @@ class RabbitmqProducer
       vhost: ENV['RABBITMQ_VHOST'],
       user: ENV['RABBITMQ_USERNAME'],
       password: ENV['RABBITMQ_PASSWORD'],
-      ssl: true,
+      ssl: false,
       verify_peer: false,
       fail_if_no_peer_cert: false,
       # If client certificates are required, uncomment and set these:
