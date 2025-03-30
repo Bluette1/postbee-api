@@ -48,7 +48,8 @@ class JobApplicationConsumer
       user: ENV['RABBITMQ_USERNAME'],
       password: ENV['RABBITMQ_PASSWORD'],
       ssl: true,
-      verify_peer: true
+      verify_peer: true,
+      fail_if_no_peer_cert: false
       # If client certificates are required, uncomment and set these:
       # tls_cert: ENV['RABBITMQ_CLIENT_CERT'],
       # tls_key: ENV['RABBITMQ_CLIENT_KEY'],
