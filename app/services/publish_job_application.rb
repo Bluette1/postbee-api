@@ -7,7 +7,7 @@ class PublishJobApplication
   def self.publish(job_id, user_id)
     message = create_test_message(job_id, user_id)
 
-    amqp_url = ENV['CLOUDAMQP_URL'] || 'amqp://guest:guest@localhost:5672/'
+    amqp_url = ENV['CLOUDAMQP_URL'] || 'amqp://guest:guest@localhost:5672/mary'
     conn = Bunny.new(amqp_url)
     conn.start
 
