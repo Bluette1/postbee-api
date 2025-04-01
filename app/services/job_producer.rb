@@ -2,7 +2,7 @@ require 'bunny'
 
 class JobProducer
   def self.publish(queue_name, message)
-    amqp_url = ENV['CLOUDAMQP_URL'] || 'amqp://guest:guest@localhost:5672/mary'
+    amqp_url = ENV['CLOUDAMQP_URL']
 
     connection = Bunny.new(amqp_url)
     connection.start

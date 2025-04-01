@@ -3,7 +3,7 @@ require 'bunny'
 
 class JobConsumer
   def self.start(queue_name)
-    @connection = Bunny.new(ENV['CLOUDAMQP_URL'] || 'amqp://guest:guest@localhost:5672/mary')
+    @connection = Bunny.new(ENV['CLOUDAMQP_URL'])
     
     begin
       @connection.start

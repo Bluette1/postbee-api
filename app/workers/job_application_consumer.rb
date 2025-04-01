@@ -3,7 +3,7 @@ require 'json'
 
 class JobApplicationConsumer
   def initialize
-    amqp_url = ENV['CLOUDAMQP_URL'] || 'amqp://guest:guest@localhost:5672/mary'
+    amqp_url = ENV['CLOUDAMQP_URL']
     @conn = Bunny.new(amqp_url)
     @conn.start
     @channel = @conn.create_channel
