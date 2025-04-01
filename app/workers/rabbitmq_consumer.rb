@@ -1,8 +1,11 @@
 require 'bunny'
 
 class RabbitmqConsumer
+  print ('TTTTTTTTTTTTTTTTTTTTTTTTT')
   def self.start(queue_name)
-    connection = Bunny.new(ENV['CLOUDAMQP_URL'])
+    amqp_url = ENV['CLOUDAMQP_URL'] || 'amqp://guest:guest@localhost:5672/'
+
+    connection = Bunny.new(amqp_url)
     # Updated connection with proper TLS settings
     # connection = Bunny.new(
     #   host: ENV['RABBITMQ_HOST'],

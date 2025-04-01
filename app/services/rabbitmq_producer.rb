@@ -2,7 +2,9 @@ require 'bunny'
 
 class RabbitmqProducer
   def self.publish(queue_name, message)
-    connection = Bunny.new(ENV['CLOUDAMQP_URL'])
+    amqp_url = ENV['CLOUDAMQP_URL'] || 'amqp://guest:guest@localhost:5672/'
+
+    connection = Bunny.new(amqp_url)
     connection.start
 
     channel = connection.create_channel
