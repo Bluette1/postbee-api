@@ -28,9 +28,11 @@ class BaseScraper
       rescue Errno::ECONNRESET => e
         retries += 1
         if retries <= MAX_RETRIES
+          # rubocop:disable Layout/LineLength
           @logger.warn "Connection reset by peer while fetching #{url}. Retrying in #{RETRY_DELAY} seconds... (Attempt ##{retries})"
           sleep(RETRY_DELAY)
           retry
+          # rubocop:enable Layout/LineLength
         else
           @logger.error "Failed to fetch #{url} after #{MAX_RETRIES} retries: #{e.message}"
         end

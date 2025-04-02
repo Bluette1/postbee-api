@@ -16,4 +16,3 @@ class JobProducer
     connection.close
   end
 end
-

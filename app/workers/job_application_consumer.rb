@@ -23,7 +23,6 @@ class JobApplicationConsumer
     user_id = message['user_id']
     puts "Received #{message}"
 
-
     send_email_recommendations(user_id, job_id)
   end
 

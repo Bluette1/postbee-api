@@ -52,7 +52,7 @@ class WeworkremotelyScraper < BaseScraper
 
     if job_post
       @logger.warn "Existing record for #{job}"
-      
+
       # Update the date if the job already exists
       job_post.update(date: job[:date])
       @logger.info "Updated date for #{job_post}"
