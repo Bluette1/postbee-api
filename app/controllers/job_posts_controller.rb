@@ -1,4 +1,5 @@
 class JobPostsController < ApplicationController
+  require_relative '../services/job_producer' # Corrected require statement
   # GET /job_posts
   def index
     @job_posts = JobPost.all
@@ -29,11 +30,12 @@ class JobPostsController < ApplicationController
     @job_post = JobPost.new(job_post_params)
 
     if @job_post.save
-      RabbitmqProducer.publish('queue', 'Hello, a new job has been posted!')
+      JobProducer.publish('queue', 'Hello, a new job has been posted!')
 
       SendJobNotificationJob.perform_later(@job_post.id)
 
       render json: @job_post, status: :created
+
     else
       Rails.logger.error "Job creation failed: #{@job_post.errors.full_messages.join(', ')}"
 

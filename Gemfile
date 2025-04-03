@@ -47,7 +47,6 @@ group :development do
   # gem 'spring'
 
   gem 'error_highlight', '>= 0.4.0', platforms: [:ruby]
-  gem 'rubocop', require: false
 
   # Linters
   gem 'rubocop-minitest'
@@ -64,6 +63,7 @@ gem 'httparty'             # Makes HTTP requests easy
 gem 'mongoid'              # MongoDB ODM
 gem 'nokogiri'             # HTML and XML parsing
 gem 'rack-cors', require: 'rack/cors' # CORS handling
+gem 'rubocop', require: false
 gem 'sidekiq' # Background job processing
 gem 'sidekiq-scheduler' # Scheduling recurring jobs
 gem 'sprockets-rails'
