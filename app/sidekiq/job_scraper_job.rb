@@ -20,7 +20,7 @@ class JobScraperJob
     scraper_types = {
       weworkremotely: weworkremotely_urls,
       remote_co: remote_co_urls,
-      remote_ok: remote_ok_urls
+      remote_ok: remote_ok_urls,
       remote_woman: remote_woman_urls
     }
 
