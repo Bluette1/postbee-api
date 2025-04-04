@@ -10,6 +10,8 @@ class ScraperFactory
       RemoteOkScraper.new(urls)
     when :remote_woman
       RemoteWomanScraper.new(urls)
+    when :remotive
+      RemotiveScraper.new(urls)  
     else
       raise "Unknown scraper type: #{type}"
     end
