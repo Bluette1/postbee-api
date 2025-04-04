@@ -14,11 +14,14 @@ class JobScraperJob
     ]
     remote_ok_urls = ['https://remoteok.com/remote-dev-jobs']
 
+    remote_woman_urls = ['https://remotewoman.com/remote-developer-jobs']
+
     # Create and run scrapers
     scraper_types = {
       weworkremotely: weworkremotely_urls,
       remote_co: remote_co_urls,
       remote_ok: remote_ok_urls
+      remote_woman: remote_woman_urls
     }
 
     scraper_types.each do |type, urls|

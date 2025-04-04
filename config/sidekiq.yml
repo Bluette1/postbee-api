@@ -5,7 +5,8 @@
 :scheduler:
   :schedule:
     job_scraper_worker:
-      cron: "0 */15 * * *"
+      # cron: "0 */15 * * *"
+      cron: "* * * * *"
       class: "JobScraperJob"
 
     send_job_recommendations:
