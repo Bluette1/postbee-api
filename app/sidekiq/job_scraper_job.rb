@@ -22,10 +22,10 @@ class JobScraperJob
     # Create and run scrapers
     scraper_types = {
       remotive: remotive_urls,
-      # weworkremotely: weworkremotely_urls,
-      # remote_co: remote_co_urls,
-      # remote_ok: remote_ok_urls,
-      # remote_woman: remote_woman_urls
+      weworkremotely: weworkremotely_urls,
+      remote_co: remote_co_urls,
+      remote_ok: remote_ok_urls,
+      remote_woman: remote_woman_urls
     }
 
     scraper_types.each do |type, urls|
