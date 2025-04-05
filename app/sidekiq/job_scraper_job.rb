@@ -17,8 +17,6 @@ class JobScraperJob
 
     remote_woman_urls = ['https://remotewoman.com/remote-developer-jobs']
 
-    
-
     # Create and run scrapers
     scraper_types = {
       remotive: remotive_urls,
