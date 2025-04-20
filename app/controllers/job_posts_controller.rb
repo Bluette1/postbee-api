@@ -1,8 +1,9 @@
 class JobPostsController < ApplicationController
   require_relative '../services/job_producer' # Corrected require statement
+
   # GET /job_posts
   def index
-    @job_posts = JobPost.all
+    @job_posts = JobPost.order(created_at: :desc)
     render json: @job_posts
   end
 
