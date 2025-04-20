@@ -3,7 +3,8 @@ class JobPostsController < ApplicationController
 
   # GET /job_posts
   def index
-    @job_posts = JobPost.order(created_at: :desc)
+    @job_posts = JobPost.limit(700).order(created_at: :desc)
+
     render json: @job_posts
   end
 
