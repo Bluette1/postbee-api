@@ -8,6 +8,10 @@
       cron: "*/15 * * * *"
       class: "JobScraperJob"
 
+    delete_jobs_worker:
+      cron: "0 0 */3 * *"
+      class: "DeleteJobPostsJob"
+
     send_job_recommendations:
       cron: "0 0 * * *"             # Runs every day at midnight
       class: "SendJobRecommendationsJob"
